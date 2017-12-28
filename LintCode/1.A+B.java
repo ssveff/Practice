@@ -1,4 +1,4 @@
-public class Solution {
+class Solution {
     /*
      * @param : An integer
      * @param : An integer
@@ -6,5 +6,12 @@ public class Solution {
      */
     public int aplusb(int a, int b) {
         // write your code here
-        return (a & b << 1) + a ^ b;
-    }
+        while(b != 0){
+        	int _a = a ^ b;
+        	int _b = (a & b) << 1;
+        	a = _a;
+        	b = _b;
+        }
+        return a;
+}}
+
