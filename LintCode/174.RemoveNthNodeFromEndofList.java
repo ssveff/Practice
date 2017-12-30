@@ -10,7 +10,7 @@
  * }
  */
 
-
+//Two Pass Algorithm
 public class Solution {
     /*
      * @param head: The first node of linked list.
@@ -38,3 +38,39 @@ public class Solution {
         return dummy.next;
     }
 }
+
+//One Pass Algorithm: Two Pointers
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        //增加dummy为防止list中只有一个element
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode first = dummy;
+        ListNode second = dummy;
+           
+        for(int i = 0; i <= n; i++){
+            first = first.next;
+        }
+        
+        while(first != null){
+            first = first.next;
+            second = second.next;
+        }
+        
+        second.next = second.next.next;
+        return dummy.next;
+        
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+

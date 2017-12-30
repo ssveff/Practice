@@ -10,7 +10,7 @@
  * }
  */
 
-
+//Iterative
 public class Solution {
     /*
      * @param head: n
@@ -28,3 +28,16 @@ public class Solution {
         return pre;
     }
 }
+
+//Recursive
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head == null || head.next == null)
+            return head;
+        ListNode p = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return p;
+    }
+}
+
