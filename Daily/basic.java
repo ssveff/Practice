@@ -595,11 +595,131 @@ public class solution{
 	}
 }
 
+//02-14-2018
+public class Solution{
+	public ListNode mergeTwoLists(ListNode l1, ListNode l2){
+		if(l1 == null){
+			return l2;
+		}
+		else if(l2 == null){
+			return l1;
+		}
+		else if(l1.val < l2.val){
+			l1.next = mergeTwoLists(l1.next, l2);
+			return l1;
+		}
+		else{
+			l2.next = mergeTwoLists(l1, l2.next);
+			return l2;
+		}
+	}
+}
+public class Solution{
+	public ListNode mergeTwoLists(ListNode l1, ListNode l2){
+		ListNode prehead = null;
+		ListNode prev = prehead;
 
+		while(l1 != null && l2 != null){
+			if(l1.val < l2.val){
+				prev.next = l1;
+				prev = l1;
+				l1 = l1.next;
+			}
+			else{
+				prev.next = l2;
+				prev = l2;
+				l2 = l2.next;
+			}
+		}
+		if(l1 == null){
+			prev.next = l2;
+		}
+		if(l2 == null){
+			prev.next = l1;
+		}
+		return prehead.next;
+	}
+}
+ArrayList<T> al = new ArralyList<>();
+Vector<T> v = new Vector<T>();
+Enumeration e = v.elements();
+public boolean hasMoreElements();
+public Object nextElement();
 
+import java.util.Enumeration;
+import java.util.Vector;
 
+public class Test{
+	public static void main(String[] args) {
+		Vector v = new Vector();
+		for(int i = 0; i < 10; i++){
+			v.addElement(i);
+		}
+		System.out.println(v);
+		Enumeration e = v.elements();
+		while(e.hasMoreElements()){
+			int i = (Integer)e.nextElement();
+			System.out.print(i + " ");
+		}
+	}
+}
+Iterator itr = c.iterator();
 
+import java.util.ArrayList;
+import java.util.Iterator;
 
+public class Test{
+	public static void main(String[] args) {
+		ArrayList a1 = new ArrayList();
+		for(int i = 0; i < 10; i++){
+			a1.add(i);
+		}
+		System.out.println(a1);
+		Iterator itr = a1.iterator();
+		while(itr.hasNext()){
+			int i = (Integer)itr.next();
+			System.out.print(i + " ");
+			if(i % 2 != 0){
+				itr.remove();
+			}
+		}
+		System.out.println();
+	}
+}
+import java.io.*;
+import java.util.*;
+
+class GFG{
+	public static void main(String[] args) {
+		ArrayList<String> a1 = new ArrayList<>();
+
+		a1.add("Practice");
+		a1.add("Quiz");
+		a1.add("code");
+		a1.add("contribute");
+
+		Iterator it = a1.iterator();
+		while(it.hasNext()){
+			System.out.println(it.next());
+		}
+
+		Vector<String> v = new Vector<>();
+		v.addElement("Practice");
+		v.addElement("quiz");
+		v.addElement("code");
+
+		Enumeration e = v.elements();
+		while(e.hasMoreElements()){
+			System.out.println(e.nextElements());
+		}
+	}
+}
+//02-16-2018
+class Solution{
+	public TreeNode deleteAllNodesLess(TreeNode root){
+		
+	}
+}
 
 
 
