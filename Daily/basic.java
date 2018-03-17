@@ -714,12 +714,248 @@ class GFG{
 		}
 	}
 }
-//02-16-2018
-class Solution{
-	public TreeNode deleteAllNodesLess(TreeNode root){
-		
+//02-17-2018
+public TreeNode insertNode(TreeNode root, int key){
+	if(root == null){
+		root = new TreeNode(key);
+		return root;
+	}
+
+	if(key < root.val){
+		insertNode(root.left, key);
+	}
+	else{
+		insertNode(root.right, key);
+	}
+	return root;
+}
+
+public void insert(int key){
+	root = insertNode(root, key);
+}
+
+public TreeNode deleteNode(TreeNode root, int key){
+	if(root == null){
+		return root;
+	}
+	if(key < root.key){
+		root.left = deleteNode(root.left, key);
+	}
+	else if(key > root.key){
+		root.right = deleteNode(root.right, key);
+	}
+	else{
+		if(root.left == null){
+			return root.right;
+		}
+		else if(root.right = null){
+			return root.left;
+		}
+
+		TreeNode minNode = findMin(root.right);
+		root.val = minNode.val;
+		root.right = deleteNode(root.right, root.val);
 	}
 }
+
+private TreeNode findMin(TreeNode root,){
+	while(node.left != null){
+		node = node.left;
+	}
+	return node;
+}
+
+public int[] twoSum(int[] nums, int target){
+	if(nums == null){
+		return null;
+	}
+	if(nums.length < 1){
+		return null;
+	}
+	HashMap<Integer, Integer> map = new HashMap<>();
+	for(int i = 0; i < nums.length; i++){
+		if(map.get(nums[i]) != null){
+			int result[] = {map.get(nums[i])}
+			return result;
+		}
+		map.put(target - nums[i], i);
+	}
+	int[] result = {};
+	return result;
+	}
+}
+
+public class UniqueTwoSumPairsinAnArray {
+	static int numberOfPairs(int[] a, long k){
+		HashMap<Integer, Integer> map = new HashMap<>();
+		int res = 0;
+		for(int i = 0; i < a.length; i++){
+			for(int j = i + 1; j < a.length; j++){
+				if(a[i] + a[j] == k && map.get(a[i]) == null){
+					res ++;
+					map.put(a[i], a[j]);
+					map.put(a[j], a[i]);
+				}
+			}
+		}
+		return res;
+	}
+}
+
+public int firstUniqChar(String s){
+	if(s.length() == 0 || s == null){
+		return -1;
+	}
+	int[] freq = new int[256];
+	for(int i = 0; i < s.length(); i++){
+		freq[s.charAt(i)]++;
+	}
+	for(int j = 0; j < s.length(); j++){
+		if(freq[s.charAt(j)] == 1){
+			return j;
+		}
+	}
+	return -1;
+}
+
+public int fibonacci(int n){
+	if(n == 1){
+		return 0;
+	}
+	if(n == 2){
+		return 1;
+	}
+	int result = fibonacci(n - 1) + fibonacci(n - 2);
+	return result;
+}
+
+public int fibonacci(int n）{
+	int a = 0;
+	int b = 1;
+	for(int 1 = 1; i <= n; i++){
+		int c = a + b;
+		a = b;
+		b = c;
+	}
+	return a;
+}
+public String reverseWord(String s){
+	if(s == null || s.length() == 0){
+		return "";
+	}
+	String[] array = s.split(" ");
+	StringBuilder sb = new StringBuilder();
+
+	for(int i = array.length - 1; i >= 0; --i){
+		if(!array[i].equals("")){
+			sb.append(array[i]).append(" ");
+		}
+	}
+
+	return sb.length() == 0 ? "" : sb.substring(0, sb.length() - 1);
+}
+
+public class Codec{
+	public String serialize(TreeNode root){
+		if(root = null){
+			sb.append("X").append(",");
+		}
+		StringBuilder sb = new StringBuilder();
+		Stack<TreeNode> stack = new Stack<>();
+		stack.push(root);
+		while(!stack.empty()){
+			root = stack.pop();
+			sb.append(root.val).append(",");
+			if(root.right != null){
+				stack.push(root.right);
+			}
+			if(root.left != null){
+				stack.push(root.left);
+			}
+		}
+		return sb.toString();
+	}
+
+	public TreeNode deserialize(String data){
+		Deque<String> nodes = new LinkedList<>();
+		queue.addAll(Array.asList(data.split(",")));
+		return buildTree(nodes);
+	}
+
+	private TreeNode buildTree(Deque<String> nodes){
+		String val = nodes.remove();
+		if(val.equals("X")){
+			return null;
+		}
+		else{
+			TreeNode node = new TreeNode(Integer.valueOf(val));
+			node.left = buildTree(nodes);
+			node.right = buildTree(nodes);
+			return node;
+		}
+	}
+}
+
+public class Codec{
+	private static final String spliter = ",";
+	private static final String NN = "X";
+
+	public String serialize (TreeNode root){
+		StringBuilder sb = new StringBuilder();
+		buildString(root, sb);
+		return sb.toString;
+	}
+
+	private void buildString(TreeNode node, StringBuilder sb){
+		if(node == null){
+			sb.append(NN).append(spliter);
+		}
+		else{
+			sb.append(node.val).append(spliter);
+			buildString(node.left, sb);
+			buildString(node.right, sb);
+		}
+	}
+
+	public TreeNode deserialize(String data){
+		Deque<String> nodes = new LinkedList<>();
+		nodes.addAll(Arrays.asList(data.split(spliter)));
+		return buildTree(nodes);
+	}
+
+	private TreeNode buildTree(Deque<String> nodes){
+		String val = nodes.remove();
+		if(val.equals(NN)){
+			return null;
+		}
+		else{
+			TreeNode node = new TreeNode(Integer.valueOf(val));
+			node.left = buildTree(nodes);
+			node.right = buildTree(nodes);
+			return node;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
