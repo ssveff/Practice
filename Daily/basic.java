@@ -936,7 +936,24 @@ public class Codec{
 		}
 	}
 }
+//03-19
+import java.util.ArrayList;
+import java.util.Iterator;
 
+public class Test{
+	public static void main(String[] args){
+		ArrayList a1= new ArrayList();
+
+		for(int i = 0; i < 10; i++){
+			a1.add(i);
+		}
+		System.out.println(a1);
+		Iterator itr = a1.iterator();
+		while(itr.hasNext()){
+			int i = (Integer)itr.next();
+		}
+	}
+}
 
 
 
