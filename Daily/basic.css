@@ -1,0 +1,63 @@
+html{
+	font-family: sans-serif;
+}
+
+form {
+	width: 500px;
+}
+
+div {
+	display: flex;
+	margin-bottom: 10px;
+}
+
+label {
+	flex: 2;
+	line-height: 2;
+	text-align: right;
+	padding-right: 20px;
+}
+
+input, textarea {
+	flex: 7;
+	font-family: sans-serif;
+	font-size: 1.1rem;
+	padding: 5px;
+}
+
+textarea{
+	height: 60px;
+}
+
+#calc {
+	width: 250px;
+	padding: 20px, 20px, 50px, 20px;
+	border: 3px solid black;
+	background-color: gray;
+	margin: auto;
+}
+
+.result{
+	display: block;
+	height: 50px;
+	width: 250px;
+	font-size: 35px;
+	text-align: right;
+	font-weight: 400;
+	margin: auto;
+	background-color: ligthGray;
+	border: 2px solid black;
+}
+
+table {
+	margin: auto;
+}
+
+input {
+	width: 50px;
+	heigth: 50px;
+	font-size: 35px;
+	font-weight: 400;
+	border: 2px solid black;
+	margin: auto;
+}

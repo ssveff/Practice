@@ -590,9 +590,32 @@ const Post = ({isFetching, allPosts, fetchPosts, deletedPost}) => (
 	</div>
 )
 
+var user = new userObject('mjs', 'sylvia')
+function userObject(userid, password){
 
+}
 
+this.userid = user.id;
+this.salt = computeSalt;
 
+myObj = {'name':'John', 'age':31, 'city': 'New York'};
+myJSON = myObj.stringify(myObj);
+localStorage.setItem('testJSON', myJSON);
+
+text = localStorage.getItem('testJSON');
+obj = JSON.parse(text);
+document.getElementsByID('demo').innerHTML = obj.name;
+
+$.ajax({
+	url: '/shared/get-list-json',
+	type: 'GET',
+	dataType: 'json',
+	sucess: function(jsons) {...}
+	error: function(xhr, status, err) {...}
+});
+
+$("div").height(100);
+$(document).ready();
 
 
 

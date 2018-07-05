@@ -1,0 +1,494 @@
+<form>
+	<div>
+		<label for="title">Post title:</label>
+		<input type = "text" id = "title" name="title" value="My excellent blog post">
+	</div>
+	<div>
+		<label for="content">Post content</label>
+		<textarea id="content" name="content" cols="60" rows="5">
+			This is the content of my excellent blog post. I hope you enjoy it!
+		</textarea>
+	</div>
+	<div>
+		<button type="submit">Update post</button>
+	</div>
+	<input type="hidden" id="postId" name="postId" value="34567">
+</form>
+
+<!doctype html>
+<html>
+	<header>
+		<meta charset="utf-8">
+		<title>Calculator</title>
+		<link rel="stylesheet" hred="/static/calculator/calculator.css">
+	</header>
+
+	<body>
+		<div id="calc">
+			<form action="." method="post">
+				<input type="hidden" name="newVal" value="{{newVal}}">
+				<input type="hidden" name="preVal" value="{{preVal}}">
+				<input type="hidden" name="preOp" value="{{preOp}}">
+				{% csrftoken %}
+				<input id="result" class="result" type="text" value="{{result}}">
+				<br>
+
+			<table>
+				<tr>
+					<td><input class="digits" name="digits" type="submit" value="7"></td>
+					<td><input class="operators" name="operators" type="submit" value="+"></td>
+				</tr>
+			</table>
+
+			{% if warning %}
+				<div>
+					{{warning}}
+				</div>
+			{% endif %}
+			</form>
+		</div>
+	</body>
+</html>
+
+<form action="/your_name/" method="post">
+	<label for="your_name">Your Name:</label>
+	<input id="your_name" type="text" name="your_name" value="{{current_name}}">
+	<input type="submit" value="OK">
+</form>
+
+<!doctype html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		{% load staticfiles %}
+		<link rel='stylesheet' href="{% static todolist/todolist.css %}">
+		<title>Shared Todo List #2 -- Login </title>
+	</head>
+
+	<body>
+		{% if form.errors %}
+			<p style='color: red'>
+				Incorrect user name and password.
+			<p>
+		{% endif %}
+		<form action="{% url 'login' %}" method='post'>
+			<table>
+				<tr>
+					<td>{{forms.username.label_tag}}</td>
+					<td>{{forms.username}}</td>
+				</tr>
+				<tr>
+					<td>{{forms.password.label_tag}}</td>
+					<td>{{forms.password}}</td>
+				</tr>
+			</table>
+		<input type="submit" value="Login" />
+		<a href="/todolist2/register">Register</a>
+		<input type="hidden" name="next" value="{{ next }}"/>
+		{% csrf_token %}
+		</form>
+	</body>
+</html>
+
+<body>
+	{% for error in errors %}
+		<p style="color: red">
+			{{ error }}
+		</p>
+	{% endfor %}
+
+	<div class="title">
+		Shared To Do List#2
+	</div>
+
+	<form method='post' action="{% url 'register' %}">
+		<table>
+			<tr>
+				<td><label>Username:</label></td>
+				<td><input type="text" name="username" value="{{username}}" autofocus></td>
+			</tr>
+			<tr>
+				<td><label>Password:</label></td>
+				<input type="password" name="password">
+			</tr>
+		</table>
+	<input type="submit" value="Resiger" />
+	{% csrf_token %}
+</form>
+</body>
+
+<body>
+	<div class='title'>Shared To do list</div>
+
+	{% for error in errors %}
+		<div class="error">
+			{{ error }}
+		</div>
+	{% endfor %}
+
+	<form method='post' action="{% url 'add-item' %}">
+		<label>Item to add:</label>
+		<input type='text' name='item' autofocus>
+		<input type='submit' value='Add item'>
+		{% csrf_token %}
+	</form>
+
+	<div class='sub-title'>Current todo list:</div>
+	<ol>
+		{% for item in items %}
+			<li>
+				<form class="delete-form"
+					action="{% url 'delete-item' item.id %}"
+					method='post'>
+					<input type="submit" value="X">
+					{% csrf_token %}
+				</form>
+				{{item.text}}
+				<span class="detail">
+					(id={{item.id}},
+					user={{item.user}},
+					ip_addr={{item.ip_addr}})
+				</span>
+			</li>
+		{% endfor %}
+	</ol>
+	<form action="{% url 'logout' %}" method="get">
+		<input type="submit" value="Logout">
+	</form>
+
+<body>
+	<div class="error">
+		{{message}}
+	</div>
+
+	<form action="{% url 'add' %}" method="post" class="add-form" enctype="multipart/form-data">
+		<table>
+			{% for field in form.visible_fields %}
+			<tr>
+				<td>{{field.label_tag}}</td>
+				<td>{{field}}</td>
+				<td class="error">
+					{% for error in field.errors %} {{ error }} {% endfor %}
+				</td>
+			</tr>
+			{% endfor %}
+			<tr><td colspan="3"><input type="submit" value="Submit"></td></tr>
+		</table>
+		{% csrf_token %}
+	</form>
+
+	<hr>
+	{% for item in items %}
+	<div>
+		{% if item.picture %}
+			<img src="{% url 'photo' item.id %}" alt="{{item.text}}" width="200px">
+			<br>
+		{% endif %}
+		<form action="{% url 'delete' item.id %}" method="post">
+			<input type="submit" value="X">
+			{% csrf_token %}
+		</form>
+		{{item.text}}
+		<span class="details">
+			(id={{item.id}},
+			ip_addr={{item.ip_addr}})
+		</span>
+	</div>
+	<hr>
+	{% endfor %}
+</body>
+
+<!doctype html>
+<html>
+<body>
+	<div id="demo">
+		<h2>The XMLHttpRequest Object</h2>
+		<button type="submit" onclick="loadDoc()">Change Content</button>
+	</div>
+
+	<script>
+		function loadDoc() {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if(this.readyState == 4 && this.status == 200){
+					document.getElementById('demo').innerHTML = this.responseText;
+				}
+			};
+			xhttp.open("GET", "ajax_info.txt", true);
+			xhttp.send();
+		}
+	</script>
+</body>
+</html>
+
+<script>
+	function loadDoc() {
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if(this.readystate == 4 && this.status == 200){
+				document.getElementById('demo').innerHTML = this.responseText;
+			}
+		};
+		xhttp.open('GET', "ajax_info.txt", true);
+		xhttp.send();
+	}
+</script>
+
+<form action="/action_page.html" method="get">
+	First Name: <input type="text" name="fname"><br>
+	Last Name: <input type="text" name="lname"><br>
+	<input type="submit" value="Submit">
+</form>
+
+<!doctype html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>Hello</title>
+	<link rel="stylesheet" href="static/intro/example.css">
+</head>
+
+<body>
+{% if person_name %}
+	<h1>Hello, {{person_name}}!</h1>
+{% endif %}
+
+<form action="greet" method="GET">
+	<label>Enter a name:</label>
+	<input type="text" name="name" autofocus>
+	<input type="submit">
+</form>
+</body>
+</html>
+
+<!doctype html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>Shared To Do List</title>
+</head>
+
+<body>
+	{% for error in errors %}
+		<div class="error">
+			{{error}}
+		</div>
+	{% endfor %}
+
+	<form class="add-form" method="post" action="/shared/add-item">
+		<label>Enter Item:</label>
+		<input type="text" name="item" autofocus>
+		<input type="submit" value="Submit">
+		{% csrf_token %}
+	</form>
+
+	<ol>
+	{% for item in items %}
+	<li>
+		<form action="delete" method="POST">
+			<input type="hidden" name="item" value="{{item}}">
+			<input type="submit" value="X">
+			{% csrf_token %}
+		</form>
+		{{ item }}
+	</li>
+	{% endfor %}
+	<ol>
+</body>
+
+<body>
+	<div class="big-heading">
+		Model Examples
+	</div>
+	<div class="user-info">
+		{% block user-info %}
+		{% endblock %}
+	</div>
+
+	{% if message %}
+		<div class="message">
+			{{message}}
+		</div>
+	{% endif %}
+
+	<div class="content">
+		{% block content %}
+		{% endblock %}
+	</div>
+</body>
+
+{% extends "welcome/base.html" %}
+{% block user-info %}
+	<form action="{% url 'register' %}" method="get">
+		<input type="submit" value="Register">
+	</form>
+{% endblock %}
+
+{% block content %}
+	{% if form.errors %}
+		<p style="color: red">
+			Incorrect user name and password
+		</p>
+	{% endif %}
+	<form method="post" action="{% url 'login' %}">
+		<table>
+			<tr>
+				<td>{{form.username.label_tag}}</td>
+				<td>{{form.username}}</td>
+			</tr>
+		</table>
+		<input type="submit" value="Login" />
+		<input type="hidden" name="next" value="{{next}}"/>
+		{% csrf_token %}
+	</form>
+{% endblock %}
+
+{% extends "welcome/base.html" %}
+{% block content %}
+	<form action="{%url 'register' %}" method="post">
+		<table>
+			{{form}}
+		</table>
+		{% csrf_token %}
+		<input type="submit" value="Register" />
+	</form>
+{% endblock %}
+
+<body>
+	<div id="demo">
+		<h2>The XMLHttpRequest Object</h2>
+		<button type="button" onclick="loadDoc()">Change Content</button>
+	</div>
+
+	<script>
+		function loadDoc(){
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadstatechange = function() {
+				if(this.readyState == 4 && this.status == 200){
+					document.getElementById("demo").innerHTML=this.responseText;
+				}
+			};
+			xhttp.open("GET", "ajax_info.txt", true);
+			xhttp.send();
+		}
+	</script>
+</body>
+
+<button>One</button><br/>
+<button>Two</button><br/>
+<button>Three</button><br/>
+$(document).ready(function() {
+	$("button").click(function(event){
+		var button = $(event.target);
+		button.css("color", "red");
+	});
+});
+
+<body>
+	<div class="title">Shared To Do List</div>
+	{% for error in errors %}
+		<div class="error">
+			{{error}}
+		</div>
+	{% endfor %}
+
+	<form action="{% url 'add-item' %}" method="post">
+		<label>Item to add:</label>
+		<input type="text" name="item" autofocus>
+		<input type="submit" text="Add Item">
+		{% csrf_token %}
+	</form>
+
+	<div class="sub-title">Current To-do List</div>
+
+	<ol>
+		{% for item in items %}
+		<li>
+			<form action="{% url 'delete-item' %}" method="POST">
+				<input type="submit" value="X">
+				{% csrf_token %}
+			</form>
+			{{item.text}}
+			<span class="details">
+				(id={{item.id}},
+				user={{item.user}},
+				ip_addr={{item.ip_addr}})
+			</span>
+		</li>
+		{% endfor %}
+	</ol>
+
+	<form action="{% url 'logout' %}" method="get">
+		<input type="submit" value="Logout">
+	</form>
+</body>
+
+<body>
+	<div>
+		Web App Address Book Example
+	</div>
+
+	<div class="user-info">
+		{% block user-info %}
+		{% endblock %}
+	</div>
+
+	<div class="search-bar">
+		{%block search-bar %}
+		{% endblock %}
+	</div>
+
+	{% if message %}
+		<div class="message">
+			{{message}}
+		</div>
+	{% endif %}
+
+	<div class="content">
+		{% block content %}
+		{% endblock %}
+	</div>
+</body>
+
+{% extends 'addrbook/base.html' %}
+{% block content %}
+	<form method="post" action="{% url 'create' %}">
+		<table>
+			{{ form }}
+		</table>
+		{% csrf_token %}
+		<input type="submit" value="Create">
+	</form>
+{% endblock %}
+
+{% extends 'addrbook/search.html' %}
+
+{% block content %}
+	{% for error in form.non_field_errors %}
+		<p style="color: red">
+			{{error}}
+		</p>
+	{% endfor %}
+
+	<form action="{% url 'edit' entry.id %}" method="post">
+		<table>
+			{% for field in form.visible_fields %}
+			<tr>
+				<td>{{field.label_tag}}</td>
+				<td>{{field}}</td>
+				<td class="error">
+					{% for error in field.errors %}
+					{{error}}
+					{% endfor %}
+				</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</form>
+
+<form enctype="multipart/form-data" action="{% url 'add' %}" method="post">
+	<table>
+		{% for field in form.visible_fields %}
+
+
+
